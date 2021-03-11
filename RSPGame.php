@@ -9,23 +9,25 @@
 </head>
 <body>
     <?php  
-    $playedRound=0;
-    $totalPlayerA=0;
-    $totalPlayerB=0;
+    
     $totalDraw=0;
     $currentPlayerA=0;
     $currentPlayerB=0;
     
-    function PlayerAWin(){
+    function playerAWin(){
         global $currentPlayerA;
         $currentPlayerA++;
     }
     
-    function PlayerBWin(){
+    function playerBWin(){
         global $currentPlayerB;
         $currentPlayerB++;
     }
 
+    function tie(){
+        global $totalDraw;
+        $totalDraw++;
+    }
     
 
 
@@ -59,24 +61,25 @@
             $materialB="Scissors";
         }
 
-        if($playerA == $playerB){   
+        if($playerA == $playerB){  
+            tie(); 
             return '<td>Player A: <br><img src="./assets/'. $materialA.'.svg" style="width:60%;"></td><td>Same choice<br> It is a draw</td><td>Player B: <br> <img src="./assets/'. $materialB.'.svg" style="width:60%;"> </td>';
         }
         else if ($playerA == 1 && $playerB == 3){
-            PlayerAWin();
+            playerAWin();
             return '<td>Player A: <br><img src="./assets/'. $materialA.'.svg" style="width:60%;"></td><td>Rock crushes scissors <br> Player A wins..</td><td>Player B: <br> <img src="./assets/'. $materialB.'.svg" style="width:60%;"> </td>';
         }
         else if ($playerA == 2 && $playerB == 1){
-            PlayerAWin();
+            playerAWin();
             return '<td>Player A: <br><img src="./assets/'. $materialA.'.svg" style="width:60%;"></td><td>Paper covers Rock <br> Player A wins..</td><td>Player B: <br> <img src="./assets/'. $materialB.'.svg" style="width:60%;"> </td>';
         }
     
         else if ($playerA == 3 && $playerB == 2){
-            PlayerAWin();
+            playerAWin();
             return '<td>Player A: <br><img src="./assets/'. $materialA.'.svg" style="width:60%;"></td><td>Scissors cuts paper <br> Player A wins.. </td><td>Player B: <br> <img src="./assets/'. $materialB.'.svg" style="width:60%;"> </td>';
         }
         else{
-            PlayerBWin();
+            playerBWin();
             return '<td>Player A: <br><img src="./assets/'. $materialA.'.svg" style="width:60%;"></td><td>'. $strings[$playerB] .' <br> Player B wins..</td><td>Player B: <br> <img src="./assets/'. $materialB.'.svg" style="width:60%;"> </td>';
         }
         
@@ -84,16 +87,14 @@
     } 
     function playGame()
    {
-    global $playedRound;
-    global $totalPlayerA;
-    global $totalPlayerB;
-    global $totalDraw;
     
         for ($i=1;$i<11;$i++)
         {
             echo "<th>Round ".$i,":</th><tr>" . getRoundWinner(getPlayerAPlay(), getPlayerBPlay()) . "</tr>";
-            $playedRound++;
+            
+
         } 
+        
     }  
     ?>
     <div class="container">
@@ -103,8 +104,20 @@
    <table class="gametable">
    
    <?php
+   global $totalDraw;
+   global $currentPlayerA;
+   global $currentPlayerB;
    
    playGame();
+   ?>
+  
+   
+   <?php
+   echo '<th class="result"> Player A: '.$currentPlayerA." wins. </th><br>";
+   
+   echo '<th class="result">'.$totalDraw." Games were a draw.</th><br>";
+   echo '<th class="result">Player B: '.$currentPlayerB." wins. </th>";
+
    ?>
    </table>
    
