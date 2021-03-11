@@ -1,0 +1,35 @@
+*{
+    margin:0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+body{
+    background-image: url(assets/BlackBoard.jpg);
+    background-repeat: repeat-y;
+    background-size: 100vw;
+    background-color: darkgrey;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.container{
+    margin:auto;
+    display: grid;
+    background-color: lightgray;
+    max-width: 50%;
+    opacity: 0.9;
+    border-radius: 5%;
+    
+}
+.gametable{
+    margin: auto;
+    left:50%;
+      
+    border: 1px solid lightslategrey;
+
+}
+td{
+    border: 3px solid lightslategrey;
+    border-radius: 10%;
+    text-align: center;
+}
+.buton{
+    margin: auto;
+}
